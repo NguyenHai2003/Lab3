@@ -167,7 +167,7 @@
           let phonePattern = /^[+]?[0-9]{7,15}$/;
           if (!phonePattern.test(phoneValue)) {
             alert(
-              "Số điện thoại không hợp lệ (chỉ chấp nhận số, ít nhất 7 số)."
+              "Số điện thoại không hợp lệ (chỉ chấp nhận số, từ 10 - 11 số)."
             );
             phoneInput.focus();
             return false;
