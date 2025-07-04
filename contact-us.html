@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="../css/contact-us.css" />
+  </head>
+
+  <body>
+    <header>
+      <img src="../img/logo.png" alt="logo" width="100%" />
+
+      <nav>
+        <a href="./home.html">Home</a>
+        <a href="./about-us.html">About Us</a>
+        <a href="./classess.html">Classes</a>
+        <a href="./nutrition.html">Nutrition</a>
+        <a href="./contact-us.html">Contact Us</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>
+        Ready to get started? Contact us today.<br />
+        Complete the form below to begin your free trial.
+      </h1>
+
+      <form id="contactForm">
+        <div class="information">
+          <div class="form-row">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="first_name" />
+            <span class="error-message" id="firstnameError"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="last_name" />
+            <span class="error-message" id="lastnameError"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" />
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" />
+            <span class="error-message" id="phoneError"></span>
+          </div>
+        </div>
+
+        <div class="check">
+          <p>I would like information about:</p>
+          <div class="form">
+            <label
+              ><input type="checkbox" name="info" value="group" /> Group
+              Fitness</label
+            >
+          </div>
+
+          <div class="form">
+            <label
+              ><input type="checkbox" name="info" value="personal" /> Personal
+              Training</label
+            >
+          </div>
+
+          <div class="form">
+            <label
+              ><input type="checkbox" name="info" value="nutrition" />
+              Nutrition</label
+            >
+          </div>
+          <div class="error-message" id="infoError"></div>
+        </div>
+
+        <div class="select">
+          <div class="form-row">
+            <label for="referral">Referral Source:</label>
+
+            <select id="referral" name="referral">
+              <option value="advertisement">Advertisement</option>
+              <option value="friend">Friend</option>
+              <option value="social">Social Media</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="question">Questions?</label><br />
+            <textarea id="question" name="question" rows="4"></textarea>
+            <span class="error-message" id="questionError"></span>
+          </div>
+
+          <div class="form-group">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset Form</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="contract">
+        <p>
+          We are located at:<br />COBI TOWER 2, 2-4 Street 8, Tan Phu
+          <br />District 7, Ho Chi Minh City, Vietnam
+        </p>
+
+        <p>Phone Number:</p>
+        <a href="tel:+84867133779">0867133779</a>
+
+        <p>Email:</p>
+        <a href="mailto:likelion.vn@likelion.net">likelion.vn@likelion.net</a>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2025. All Rights Reserved. <br />
+      <a href="mailto:likelion.vn@likelion.net">likelion.vn@likelion.net</a>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let form = document.getElementById("contactForm");
+        let firstNameInput = document.getElementById("firstname");
+        let lastNameInput = document.getElementById("lastname");
+        let emailInput = document.getElementById("email");
+        let phoneInput = document.getElementById("phone");
+        let questionInput = document.getElementById("question");
+        let infoCheckboxes = document.querySelectorAll('input[name="info"]');
+
+        function validateName(input, fieldName) {
+          if (input.value.trim() === "") {
+            alert(`${fieldName} không được để trống.`);
+            input.focus();
+            return false;
+          }
+          return true;
+        }
+
+        function validateEmail() {
+          let emailValue = emailInput.value.trim();
+          if (emailValue === "") {
+            alert("Email không được để trống.");
+            emailInput.focus();
+            return false;
+          }
+          let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(emailValue)) {
+            alert("Email không hợp lệ.");
+            emailInput.focus();
+            return false;
+          }
+          return true;
+        }
+
+        function validatePhone() {
+          let phoneValue = phoneInput.value.trim();
+          if (phoneValue === "") {
+            alert("Số điện thoại không được để trống.");
+            phoneInput.focus();
+            return false;
+          }
+          let phonePattern = /^[+]?[0-9]{7,15}$/;
+          if (!phonePattern.test(phoneValue)) {
+            alert(
+              "Số điện thoại không hợp lệ (chỉ chấp nhận số, ít nhất 7 số)."
+            );
+            phoneInput.focus();
+            return false;
+          }
+          return true;
+        }
+
+        function validateQuestion() {
+          if (questionInput.value.trim() === "") {
+            alert("Vui lòng nhập câu hỏi của bạn.");
+            questionInput.focus();
+            return false;
+          }
+          return true;
+        }
+
+        function validateInfoCheckboxes() {
+          let isChecked = false;
+          for (let i = 0; i < infoCheckboxes.length; i++) {
+            if (infoCheckboxes[i].checked) {
+              isChecked = true;
+              break;
+            }
+          }
+          if (!isChecked) {
+            alert("Vui lòng chọn ít nhất một loại thông tin.");
+            return false;
+          }
+          return true;
+        }
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          let isValid = true;
+          if (!validateName(firstNameInput, "Tên")) {
+            isValid = false;
+          }
+          if (!validateName(lastNameInput, "Họ")) {
+            isValid = false;
+          }
+          if (!validateEmail()) {
+            isValid = false;
+          }
+          if (!validatePhone()) {
+            isValid = false;
+          }
+          if (!validateInfoCheckboxes()) {
+            isValid = false;
+          }
+          if (!validateQuestion()) {
+            isValid = false;
+          }
+
+          if (isValid) {
+            alert("Form đã được gửi thành công!");
+            form.submit();
+          } else {
+            alert("Vui lòng sửa các lỗi trong form trước khi gửi.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
